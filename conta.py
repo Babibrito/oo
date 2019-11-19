@@ -69,11 +69,26 @@ class AtualizadorDeContas:
     def __init__(self, taxa):
         self._taxa = taxa
         
-    def atualiza(self, conta):
+    def roda(self, conta):
+        print('\n')
         conta.extrato()
         conta.atualiza(self._taxa)
         print('==========')
         conta.extrato()
+        print('\n')
+
+class Banco:
+    def __init__(self, contas=[]):
+        self._contas = contas
+    
+    def adicionaConta(self, conta):
+        self._contas.append(conta)
+        
+    def pegaConta(self, posicao):
+        return self._contas[posicao]
+    
+    def pegaTotalDeContas(self):
+        return len(self._contas)
 
 d1 = Data(11, 4, 2002)
 d2 = Data(30, 11, 2100)
@@ -86,6 +101,13 @@ cc = ContaCorrente(11113, cl2, 0, 5000, d2)
 cc.deposita(10)
 
 atualizador = AtualizadorDeContas(1.1)
-atualizador.atualiza(cc)
+atualizador.roda(cc)
 
+bb = Banco()
+bb.adicionaConta(ct1)
+bb.adicionaConta(ct2)
+bb.adicionaConta(cc)
 
+qnt = bb.pegaTotalDeContas()
+for i in range(qnt):
+    atualizador.roda(bb.pegaConta(i))
