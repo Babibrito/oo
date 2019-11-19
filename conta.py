@@ -5,10 +5,15 @@ class Conta:
         self.saldo = saldo
         self.limite = limite
         self.data_abertura = data_abertura
-        
+
+         
+    def atualiza(self, taxa_percentual):
+        self.saldo *= taxa_percentual        
+         
     def deposita(self, valor):
         self.saldo += valor
-    
+        
+        
     def saca(self, valor):
         if valor > self.saldo or valor <= 0:
             return False
@@ -22,28 +27,25 @@ class Conta:
         print('Saldo: R$ {}'.format(self.saldo))
         
     def transfere_para(self, conta_destino, valor):
-        if valor <= self.saldo:
+         if valor <= self.saldo:
             self.saca(valor)
             conta_destino.deposita(valor)
             return True
-        else:
+         else:
             return False
-    
-    def atualiza(self, taxa_percentual):
-        pass
-    
-
+        
 class Cliente:
-    def __init__(self, nome, sobrenome, cpf):
-        self.nome = nome
-        self.sobrenome = sobrenome
-        self.cpf = cpf
-  
+     def __init__(self, nome, sobrenome, cpf):
+         self.nome = nome
+         self.sobrenome = sobrenome
+         self.cpf = cpf
+        
 class Data:
     def __init__(self, dia, mes, ano):
         self.dia = dia
         self.mes = mes
         self.ano = ano
+        
 
 class Historico:
     def __init__(self):
@@ -53,6 +55,7 @@ class ContaCorrente:
     pass
         
 
+        
 
 d1 = Data(11, 4, 2002)
 d2 = Data(30, 11, 2100)
