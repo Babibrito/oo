@@ -33,6 +33,10 @@ class Conta:
             return True
          else:
             return False
+    def __str__(self):
+        return '''
+Isso é uma Conta, meu jovi :v
+'''
         
 class Cliente:
      def __init__(self, nome, sobrenome, cpf):
@@ -61,7 +65,15 @@ class ContaPoupanca(Conta):
     def atualiza(self, taxa_percentual):
         self.saldo *= 3*taxa_percentual
 
+class AtualizadorDeContas:
+    def __init__(self, taxa):
+        self._taxa = taxa
         
+    def atualiza(self, conta):
+        conta.extrato()
+        conta.atualiza(self._taxa)
+        print('==========')
+        conta.extrato()
 
 d1 = Data(11, 4, 2002)
 d2 = Data(30, 11, 2100)
@@ -71,5 +83,9 @@ cl2 = Cliente('Joao', 'Irinelson', '12830439636')
 ct2 = Conta(11112, cl2, 0, 5000, d2)
 
 cc = ContaCorrente(11113, cl2, 0, 5000, d2)
+cc.deposita(10)
+
+atualizador = AtualizadorDeContas(1.1)
+atualizador.atualiza(cc)
 
 
