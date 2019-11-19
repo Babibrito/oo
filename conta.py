@@ -51,9 +51,15 @@ class Historico:
     def __init__(self):
         self.historico = []
             
-class ContaCorrente:
-    pass
+class ContaCorrente(Conta):    
+    def atualiza(self, taxa_percentual):
+        self.saldo *= 2*taxa_percentual
+    def deposita(self, valor):
+        self.saldo += valor - 0.1
         
+class ContaPoupanca(Conta):    
+    def atualiza(self, taxa_percentual):
+        self.saldo *= 3*taxa_percentual
 
         
 
@@ -63,3 +69,7 @@ cl1 = Cliente('Maria', 'Nascimento', '12830439635')
 ct1 = Conta(11111, cl1, 0, 5000, d1)
 cl2 = Cliente('Joao', 'Irinelson', '12830439636')
 ct2 = Conta(11112, cl2, 0, 5000, d2)
+
+cc = ContaCorrente(11113, cl2, 0, 5000, d2)
+
+
